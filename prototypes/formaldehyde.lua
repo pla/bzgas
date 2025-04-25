@@ -12,8 +12,8 @@ data:extend({
     type = "fluid",
     name = "formaldehyde",
     default_temperature = 25,
-    heat_capacity = "0.1KJ",
-    fuel_value = "0.5KJ",
+    heat_capacity = "0.1kJ",
+    fuel_value = "0.5kJ",
     base_color = {r=0.77, g=0.87, b=0.67},
     flow_color = {r=0.77, g=0.87, b=0.77},
     icon =  "__bzgas__/graphics/icons/formaldehyde.png",
@@ -25,7 +25,7 @@ data:extend({
     name = "formaldehyde",
     category = "chemistry",
     subgroup = "fluid-recipes",
-    enabled = "false",
+    enabled = false,
     ingredients = {
       {type="fluid", name="gas", amount=10}
     },

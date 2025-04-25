@@ -1,35 +1,23 @@
-local util = require("data-util");
+local util = require("__bzgas__.data-util");
 local futil = require("util")
 
 local ge_ingredients = {
-  {"iron-plate", 10},
-  {"pipe", 10},
-  {"stone-brick", 4},
+  util.item("iron-plate", 10),
+  util.item("pipe", 10),
+  util.item("stone-brick", 4),
 }
 local ge_prereq = {"automation"}
-if mods.bzlead then table.insert(ge_ingredients, {"lead-plate", 4}) end
+if mods.bzlead then table.insert(ge_ingredients, util.item("lead-plate", 4)) end
 if mods.Krastorio2 then 
-  table.insert(ge_ingredients, {"sand", 10})
+  table.insert(ge_ingredients, util.item("kr-sand", 10))
   ge_prereq = {"kr-stone-processing"}
 elseif mods["aai-industry"] then
-  table.insert(ge_ingredients, {"sand", 10})
+  table.insert(ge_ingredients, util.item("sand", 10))
   ge_prereq = {"sand-processing"}
 elseif data.raw.item["silica"] and data.raw.technology["silica-processing"] then
-  table.insert(ge_ingredients, {"silica", 20})
-  ge_prereq = {"silica-processing"}
+  table.insert(ge_ingredients, util.item("silica", 20))
+  -- ge_prereq = {"silica-processing"}
 end
-
-drilling_rig_circuit_connector_definitions = circuit_connector_definitions.create
-(
-  universal_connector_template,
-  {
-    { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
-    { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
-    { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
-    { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true }
-  }
-)
-
 
 data:extend({
   {
@@ -45,7 +33,7 @@ data:extend({
   {
     type = "recipe",
     name = "gas-extractor",
-    result = "gas-extractor",
+    results = {{ type = "item", name = "gas-extractor", amount = 1}},
     enabled = false, -- TODO change
     ingredients = ge_ingredients,
   },
@@ -60,7 +48,7 @@ data:extend({
     },
     unit = {
       count = 10,
-      ingredients = mods.Krastorio2 and {{"basic-tech-card", 1}} or {{"automation-science-pack", 1}},
+      ingredients = mods.Krastorio2 and {{"kr-basic-tech-card", 1}} or {{"automation-science-pack", 1}},
       time = 20,
     },
   },
@@ -82,18 +70,19 @@ data:extend({
     energy_source =
     {
       type = "electric",
-      emissions_per_minute = 10,
+      emissions_per_minute = { pollution = 10 },
       usage_priority = "secondary-input"
     },
     output_fluid_box =
     {
-      base_area = 10,
-      base_level = 1,
+      volume = 100,
       pipe_covers = pipecoverspictures(),
       pipe_connections =
       {
         {
-          positions = { {0, -2}, {2, 0}, {0, 2}, {-2, 0} }
+          flow_direction = "input-output",
+          direction = defines.direction.north,
+          positions = { {0, -1.198}, {1.198, 0}, {0, 1.198}, {-1.198, 0} }
         }
       }
     },
@@ -101,10 +90,7 @@ data:extend({
     mining_speed = util.me.finite() and 2 or 1,
     resource_searching_radius = 0.49,
     vector_to_place_result = {0, 0},
-    module_specification =
-    {
-      module_slots = 2
-    },
+      module_slots = 2,
     radius_visualisation_picture =
     {
       filename = "__base__/graphics/entity/pumpjack/pumpjack-radius-visualization.png",
@@ -147,6 +133,7 @@ data:extend({
         shift = futil.by_pixel(-8, 8),
       },
     },
+    graphics_set = {
     animations = {
       layers = {
         {
@@ -176,6 +163,7 @@ data:extend({
         },
       },
     },
+  },
     vehicle_impact_sound = data.raw["mining-drill"]["pumpjack"].vehicle_impact_sound,
     open_sound = data.raw["mining-drill"]["pumpjack"].open_sound,
     close_sound = data.raw["mining-drill"]["pumpjack"].close_sound,
@@ -195,8 +183,8 @@ data:extend({
     },
     fast_replaceable_group = "pumpjack",
 
-    circuit_wire_connection_points = drilling_rig_circuit_connector_definitions.points,
-    circuit_connector_sprites = drilling_rig_circuit_connector_definitions.sprites,
+    circuit_wire_connection_points = circuit_connector_definitions["pumpjack"].points,
+    circuit_connector_sprites = circuit_connector_definitions["pumpjack"].sprites,
     circuit_wire_max_distance = default_circuit_wire_max_distance
   }
 })

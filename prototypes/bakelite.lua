@@ -1,4 +1,4 @@
-local util = require("data-util");
+local util = require("__bzgas__.data-util");
 
 b_prereq = {"basic-chemistry"}
 if data.raw.technology["foundry"] then
@@ -20,9 +20,10 @@ data:extend({
     name = "bakelite",
     category = "chemistry",
     main_product = "bakelite",
-    enabled = "false",
+    allow_productivity = true,
+    enabled = false,
     ingredients = {
-      {util.me.use_phenol() and "phenol" or "coal", 1},
+      util.me.use_phenol() and {type="item", name="phenol", amount=1} or {type="item", name="coal", amount=1},
       {type="fluid", name="formaldehyde", amount=10}
     },
     energy_required = 2,

@@ -1,17 +1,17 @@
-local util = require("data-util");
+local util = require("__bzgas__.data-util");
 local futil = require("util");
 
 data:extend({
   {
     type = "recipe",
     name = "basic-chemical-plant",
-    result = "basic-chemical-plant",
+    results = {{type="item", name="basic-chemical-plant", amount = 1}},
     enabled = false,
     ingredients = {
-      {"stone-brick", 5},
-      {"iron-plate", 4},
-      {"copper-plate", 4},
-      {"pipe", 6},
+      {type="item", name="stone-brick", amount=5},
+      {type="item", name="iron-plate", amount=4},
+      {type="item", name="copper-plate", amount=4},
+      {type="item", name="pipe", amount=6},
     },
   }
 })
@@ -28,7 +28,6 @@ plant_i.name = "basic-chemical-plant"
 plant_i.place_result = "basic-chemical-plant"
 plant_i.icon = nil
 plant_i.icon_size = nil
-plant_i.icon_mipmaps = nil
 plant_i.icons = {
   {icon="__base__/graphics/icons/chemical-plant.png", icon_size=64},
   {icon="__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size=64},
@@ -45,20 +44,15 @@ end
 local plant_e = futil.table.deepcopy(data.raw["assembling-machine"]["chemical-plant"])
 plant_e.name = "basic-chemical-plant"
 plant_e.minable = {mining_time = 0.5, result = "basic-chemical-plant"}
-plant_e.module_specification = {module_slots = 0}
-plant_e.working_visualisations = {plant_e.working_visualisations[1], plant_e.working_visualisations[2]} -- no smoke
-plant_e.animation.north.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.north.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.south.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.south.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.east.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.east.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.west.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.west.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.module_slots = 0
+plant_e.graphics_set.working_visualisations = {plant_e.graphics_set.working_visualisations[1], plant_e.graphics_set.working_visualisations[2]} -- no smoke
+plant_e.graphics_set.animation.north.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.south.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.east.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.west.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
 plant_e.next_upgrade="chemical-plant"
 plant_e.icon = nil
 plant_e.icon_size = nil
-plant_e.icon_mipmaps = nil
 plant_e.icons = {
   {icon="__base__/graphics/icons/chemical-plant.png", icon_size=64},
   {icon="__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size=64},
@@ -68,7 +62,7 @@ plant_e.energy_source = {
   type = "burner",
   fuel_inventory_size = 1,
   effectivity = 1,
-  emissions_per_minute = 5,
+  emissions_per_minute = { pollution = 5 },
   fuel_categories = {"chemical"},
   smoke = {
     {

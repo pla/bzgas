@@ -6,9 +6,9 @@ if mods.Krastorio2 then
       name = "gas-reforming",
       category = "chemistry",
       subgroup = "fluid-recipes",
-      main_product = "hydrogen",
+      main_product = "kr-hydrogen",
       icons = {
-        {icon = kr_fluids_icons_path.."hydrogen.png", icon_size = 64, icon_mipmaps = 4},
+        {icon = "__Krastorio2Assets__/icons/fluids/hydrogen.png", icon_size = 64, icon_mipmaps = 4},
         {icon =  "__bzgas__/graphics/icons/gas.png", icon_size = 128, scale = 0.125, shift={-8,-8}},
       },
       enabled = false,
@@ -18,7 +18,7 @@ if mods.Krastorio2 then
       },
       energy_required = 3,
       results = {
-        {type="fluid", name="hydrogen", amount = 100},
+        {type="fluid", name="kr-hydrogen", amount = 100},
       },
     },
     {
@@ -29,12 +29,12 @@ if mods.Krastorio2 then
       main_product = "formaldehyde",
       icons = {
         {icon =  "__bzgas__/graphics/icons/formaldehyde.png", icon_size = 128, scale = 0.125},
-        {icon = kr_fluids_icons_path.."biomethanol.png", icon_size = 64, scale = 0.125, icon_mipmaps = 4, shift={-5,-5}},
+        {icon = "__Krastorio2Assets__/icons/fluids/biomethanol.png", icon_size = 64, scale = 0.125, icon_mipmaps = 4, shift={-5,-5}},
       },
       enabled = false,
       ingredients = {
-        {type="fluid", name="biomethanol", amount=50},
-        {type="fluid", name="oxygen", amount=25},
+        {type="fluid", name="kr-biomethanol", amount=50},
+        {type="fluid", name="kr-oxygen", amount=25},
       },
       energy_required = 7,
       results = {
@@ -52,7 +52,7 @@ if mods.Krastorio2 then
       subgroup = "fluid-recipes",
       main_product = "hydrogen",
       icons = {
-        {icon = kr_fluids_icons_path.."hydrogen.png", icon_size = 64, icon_mipmaps = 4},
+        {icon = "__Krastorio2Assets__/icon/fluids/hydrogen.png", icon_size = 64, icon_mipmaps = 4},
         {icon =  "__space-exploration-graphics__/graphics/icons/fluid/methane-gas.png", icon_size = 64, scale = 0.25, shift={-8,-8}},
       },
       enabled = false,
@@ -62,7 +62,7 @@ if mods.Krastorio2 then
       },
       energy_required = 2,
       results = {
-        {type="fluid", name="hydrogen", amount = 100},
+        {type="fluid", name="kr-hydrogen", amount = 100},
       },
     },
     })

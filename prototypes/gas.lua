@@ -1,5 +1,5 @@
 local resource_autoplace = require('resource-autoplace');
-local noise = require('noise');
+-- local noise = require('noise');
 
 local util = require("data-util");
 local futil = require("util")
@@ -13,10 +13,10 @@ data:extend({
     richness = true,
     order = "b-ez"
 	},
-	{
-    type = "noise-layer",
-    name = "gas"
-	},
+	-- {
+  --   type = "noise-layer",
+  --   name = "gas"
+	-- },
   {
     type = "resource",
     name = "gas",
@@ -24,7 +24,7 @@ data:extend({
     icon_size = 128,
     flags = {"placeable-neutral"},
     category = "gas",
-    subgroup = "raw-resource",
+    subgroup = "mineable-fluids",
     order="a-b-a",
     infinite = true,
     highlight = true,
@@ -71,25 +71,14 @@ data:extend({
     {
       sheet =
       {
-        filename = "__bzgas__/graphics/entity/ores/gas.png",
+        filename = "__bzgas__/graphics/entity/ores/hr-gas.png",
         priority = "extra-high",
-        width = 64,
-        height = 64,
+        width = 128,
+        height = 128,
         frame_count = 4,
         variation_count = 1,
         shift = futil.by_pixel(0, -12),
-        scale = 0.75,
-        hr_version =
-        {
-          filename = "__bzgas__/graphics/entity/ores/hr-gas.png",
-          priority = "extra-high",
-          width = 128,
-          height = 128,
-          frame_count = 4,
-          variation_count = 1,
-          shift = futil.by_pixel(0, -12),
-          scale = 0.5*0.75,
-        }
+        scale = 0.5*0.75,
       }
     },
     stages_effect =
@@ -130,8 +119,8 @@ data:extend({
     type = "fluid",
     name = "gas",
     default_temperature = 25,
-    heat_capacity = "0.1KJ",
-    fuel_value = "1000KJ",
+    heat_capacity = "0.1kJ",
+    fuel_value = "1000kJ",
     emissions_multiplier = util.se6() and 1.1 or 0.75,
     base_color = {r=0.67, g=0.87, b=0.77},
     flow_color = {r=0.67, g=0.87, b=0.87},

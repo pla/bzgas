@@ -35,7 +35,7 @@ end
 script.on_event(defines.events.on_console_chat, on_console_chat)
 
 function on_init()
-  if global.starting_spawn then return end
+  if storage.starting_spawn then return end
   if settings.global["bzgas-force-spawn"].value then
     local gas = game.surfaces["nauvis"].find_entities_filtered({area = {{-100, -100}, {100, 100}}, name="gas"})
     if #gas == 0 then
@@ -45,7 +45,7 @@ function on_init()
       end
     end
   end
-  global.starting_spawn = true
+  storage.starting_spawn = true
 end
 script.on_init(on_init)
 

@@ -11,7 +11,7 @@ if mods["248k"] then
       },
       category = "chemistry",
       subgroup = "fi_item_subgroup_f",
-      enabled = "false",
+      enabled = false,
       energy_required = 3,
       ingredients = {
         {type="fluid", name="fi_acid_gas", amount=10},

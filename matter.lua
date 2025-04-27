@@ -11,7 +11,7 @@ util.k2matter({
     unlocked_by = "gas-matter-processing",
   },
   k2baseicon = "oil",
-  icon = { icon = "__bzgas__/graphics/icons/gas.png", icon_size = 128, scale = 1.4}
+  icon = { icon = "__bzgas__/graphics/icons/gas.png", icon_size = 128, scale = 0.7}
 })
 
 -- local matter = require("__Krastorio2__/lib/public/data-stages/matter-util")

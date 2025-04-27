@@ -34,9 +34,10 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   util.remove_prerequisite("automation","automation-science-pack")
   util.set_tech_trigger("automation",{type="mine-entity",entity="coal"})
 
-  util.set_tech_trigger("gas-extraction",{type="craft-item",item="phenol"})
+  util.set_tech_trigger("gas-extraction",{type="craft-item",item="copper-plate"})
   util.set_tech_trigger("basic-chemistry",{type="mine-entity",entity="gas"})
   util.set_tech_trigger("bakelite",{type="craft-fluid",fluid="formaldehyde"})
+  util.set_tech_trigger("electronics",{type="craft-item",item="bakelite"})
   util.add_effect("electronics", { type = "unlock-recipe", recipe = "long-handed-inserter" })
   util.remove_recipe_effect("automation", "long-handed-inserter")
   

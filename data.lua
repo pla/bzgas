@@ -1,7 +1,7 @@
 require("prototypes/gas")
 require("prototypes/gas-extractor")
-require("prototypes/phenol")
 require("prototypes/formaldehyde")
+require("prototypes/phenol")
 require("prototypes/bakelite")
 require("prototypes/basic-chemical-plant")
 require("prototypes/k2-recipe")

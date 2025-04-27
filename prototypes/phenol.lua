@@ -19,7 +19,7 @@ data:extend({
   },
 })
 
-if data.raw.item["coke"] then
+if data.raw.item["coke"] or data.raw.item["kr-coke"] then
   local cat
   if mods.Krastorio2 then
     cat  = "smelting"
@@ -44,7 +44,7 @@ if data.raw.item["coke"] then
         subgroup = "raw-material",
         results = {
           {type="item", name="phenol", amount = 6},
-          {type="item", name="coke", amount = 3},
+          {type="item", name="kr-coke", amount = 3},
         },
       }
     })
@@ -69,9 +69,9 @@ if data.raw.item["coke"] then
     })
   end
   if mods.Krastorio2 then
-    util.add_effect("steel-processing", {type="unlock-recipe", recipe="phenol"})
-  elseif data.raw.item["foundry"] then
-    util.add_effect("foundry", {type="unlock-recipe", recipe="phenol"})
+    util.add_effect("basic-chemistry", {type="unlock-recipe", recipe="phenol"})
+  -- elseif data.raw.item["foundry"] then
+  --   util.add_effect("foundry", {type="unlock-recipe", recipe="phenol"})
   else
     util.add_effect("basic-chemistry", {type="unlock-recipe", recipe="phenol"})
   end

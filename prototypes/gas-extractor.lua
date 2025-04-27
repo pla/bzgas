@@ -14,10 +14,21 @@ if mods.Krastorio2 then
 elseif mods["aai-industry"] then
   table.insert(ge_ingredients, util.item("sand", 10))
   ge_prereq = {"sand-processing"}
-elseif data.raw.item["silica"] and data.raw.technology["silica-processing"] then
-  table.insert(ge_ingredients, util.item("silica", 20))
-  -- ge_prereq = {"silica-processing"}
+-- elseif data.raw.item["silica"] and data.raw.technology["silica-processing"] then
+--   table.insert(ge_ingredients, util.item("silica", 20))
+--   ge_prereq = {"silica-processing"}
 end
+
+-- drilling_rig_circuit_connector_definitions = circuit_connector_definitions.create
+-- (
+--   universal_connector_template,
+--   {
+--     { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
+--     { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
+--     { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true },
+--     { variation = 26, main_offset = futil.by_pixel(32, -3), shadow_offset = futil.by_pixel(32, -3), show_shadow = true }
+--   }
+-- )
 
 data:extend({
   {
@@ -82,7 +93,7 @@ data:extend({
         {
           flow_direction = "input-output",
           direction = defines.direction.north,
-          positions = { {0, -1.198}, {1.198, 0}, {0, 1.198}, {-1.198, 0} }
+          positions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} }
         }
       }
     },
@@ -134,7 +145,7 @@ data:extend({
       },
     },
     graphics_set = {
-    animations = {
+    animation = {
       layers = {
         {
           filename = "__bzgas__/graphics/entity/gas-extractor-animated.png",

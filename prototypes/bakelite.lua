@@ -2,7 +2,7 @@ local util = require("__bzgas__.data-util");
 
 b_prereq = {"basic-chemistry"}
 if data.raw.technology["foundry"] then
-  table.insert(b_prereq, "foundry")
+  -- table.insert(b_prereq, "foundry")
 end
 
 data:extend({

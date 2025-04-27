@@ -1,4 +1,4 @@
-local util = require("data-util");
+local util = require("__bzgas__.data-util");
 if mods.Krastorio2 then
   data:extend({
     {
@@ -43,6 +43,10 @@ if mods.Krastorio2 then
       },
     },
   })
+
+  util.set_tech_recipe("basic-chemistry",{{"kr-basic-tech-card", 1}})
+  util.set_tech_recipe("bakelite",{{"kr-basic-tech-card", 1}})
+  
   if util.se6() then
     data:extend({
     {

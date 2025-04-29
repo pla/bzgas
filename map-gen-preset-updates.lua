@@ -8,3 +8,8 @@ if data.raw["map-gen-presets"] and data.raw["map-gen-presets"].default then
     end
   end
 end
+
+for _, resource in pairs({ "gas" }) do
+  data.raw.planet.nauvis.map_gen_settings.autoplace_controls[resource] = {}
+  data.raw.planet.nauvis.map_gen_settings.autoplace_settings.entity.settings[resource] = {}
+end

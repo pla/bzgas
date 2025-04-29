@@ -1,7 +1,6 @@
-local resource_autoplace = require('resource-autoplace');
--- local noise = require('noise');
+local resource_autoplace = require('resource-autoplace')
 
-local util = require("data-util");
+local util = require("data-util")
 local futil = require("util")
 
 data:extend({ {type = "resource-category", name="gas"} })
@@ -13,10 +12,6 @@ data:extend({
     richness = true,
     order = "b-ez"
 	},
-	-- {
-  --   type = "noise-layer",
-  --   name = "gas"
-	-- },
   {
     type = "resource",
     name = "gas",
@@ -85,28 +80,15 @@ data:extend({
     {
       sheet =
       {
-        filename = "__bzgas__/graphics/entity/ores/gas-effect.png",
+        filename = "__bzgas__/graphics/entity/ores/hr-gas-effect.png",
         priority = "extra-high",
-        width = 64,
-        height = 64,
+        width = 128,
+        height = 128,
         frame_count = 4,
         variation_count = 1,
-        shift = futil.by_pixel(0, -12),
-        scale = 0.75,
+        shift = futil.by_pixel(0, -17),
         blend_mode = "normal",
-        hr_version =
-        {
-          filename = "__bzgas__/graphics/entity/ores/hr-gas-effect.png",
-          priority = "extra-high",
-          width = 128,
-          height = 128,
-          frame_count = 4,
-          variation_count = 1,
-          shift = futil.by_pixel(0, -17),
-          scale = 0.5,
-          blend_mode = "normal",
-          scale = 0.5*0.75,
-        }
+        scale = 0.5*0.75,
       }
     },
     effect_animation_period = 3.5,

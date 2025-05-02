@@ -7,7 +7,7 @@ util.k2matter({
     material = { type = "fluid", name = "gas", amount = 100 },
     matter_count = 5,
     energy_required = 1,
-    needs_stabilizer = false,
+    need_stabilizer = false,
     unlocked_by = "gas-matter-processing",
   },
   k2baseicon = "oil",

@@ -1,4 +1,4 @@
-local util = require("data-util");
+-- local util = require("data-util");
 
 -- for i, recipe in pairs(util.me.recipes) do
 --   if data.raw.recipe[recipe] then

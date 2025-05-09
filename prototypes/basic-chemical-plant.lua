@@ -5,13 +5,13 @@ data:extend({
   {
     type = "recipe",
     name = "basic-chemical-plant",
-    results = {{type="item", name="basic-chemical-plant", amount = 1}},
+    results = { { type = "item", name = "basic-chemical-plant", amount = 1 } },
     enabled = false,
     ingredients = {
-      {type="item", name="stone-brick", amount=5},
-      {type="item", name="iron-plate", amount=4},
-      {type="item", name="copper-plate", amount=4},
-      {type="item", name="pipe", amount=6},
+      { type = "item", name = "stone-brick", amount = 5 },
+      { type = "item", name = "iron-plate", amount = 4 },
+      { type = "item", name = "copper-plate", amount = 4 },
+      { type = "item", name = "pipe",     amount = 6 },
     },
   }
 })
@@ -19,8 +19,12 @@ data:extend({
 util.add_ingredient("basic-chemical-plant", "lead-plate", 4)
 util.replace_ingredient("basic-chemical-plant", "iron-plate", "aluminum-plate")
 util.replace_ingredient("basic-chemical-plant", "copper-plate", "tin-plate")
-util.replace_ingredient("basic-chemical-plant", "stone-brick", "sand", 10)
-util.replace_ingredient("basic-chemical-plant", "stone-brick", "silica", 10)
+if mods.Krastorio2 then
+  util.replace_ingredient("basic-chemical-plant", "stone-brick", "kr-sand", 10)
+else
+  util.replace_ingredient("basic-chemical-plant", "stone-brick", "sand", 10)
+  util.replace_ingredient("basic-chemical-plant", "stone-brick", "silica", 10)
+end
 
 -- item
 local plant_i = futil.table.deepcopy(data.raw.item["chemical-plant"])
@@ -29,8 +33,8 @@ plant_i.place_result = "basic-chemical-plant"
 plant_i.icon = nil
 plant_i.icon_size = nil
 plant_i.icons = {
-  {icon="__base__/graphics/icons/chemical-plant.png", icon_size=64},
-  {icon="__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size=64},
+  { icon = "__base__/graphics/icons/chemical-plant.png",        icon_size = 64 },
+  { icon = "__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size = 64 },
 }
 
 data.raw.item["basic-chemical-plant"] = plant_i
@@ -43,19 +47,20 @@ end
 -- entity
 local plant_e = futil.table.deepcopy(data.raw["assembling-machine"]["chemical-plant"])
 plant_e.name = "basic-chemical-plant"
-plant_e.minable = {mining_time = 0.5, result = "basic-chemical-plant"}
+plant_e.minable = { mining_time = 0.5, result = "basic-chemical-plant" }
 plant_e.module_slots = 0
-plant_e.graphics_set.working_visualisations = {plant_e.graphics_set.working_visualisations[1], plant_e.graphics_set.working_visualisations[2]} -- no smoke
-plant_e.graphics_set.animation.north.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.graphics_set.animation.south.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.graphics_set.animation.east.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.graphics_set.animation.west.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.next_upgrade="chemical-plant"
+plant_e.graphics_set.working_visualisations = { plant_e.graphics_set.working_visualisations[1], plant_e.graphics_set
+    .working_visualisations[2] }                                                                                                               -- no smoke
+plant_e.graphics_set.animation.north.layers[1].filename = "__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.south.layers[1].filename = "__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.east.layers[1].filename = "__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.west.layers[1].filename = "__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.next_upgrade = "chemical-plant"
 plant_e.icon = nil
 plant_e.icon_size = nil
 plant_e.icons = {
-  {icon="__base__/graphics/icons/chemical-plant.png", icon_size=64},
-  {icon="__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size=64},
+  { icon = "__base__/graphics/icons/chemical-plant.png",        icon_size = 64 },
+  { icon = "__bzgas__/graphics/icons/chemical-plant-overlay.png", icon_size = 64 },
 }
 
 plant_e.energy_source = {
@@ -63,16 +68,16 @@ plant_e.energy_source = {
   fuel_inventory_size = 1,
   effectivity = 1,
   emissions_per_minute = { pollution = 5 },
-  fuel_categories = {"chemical"},
+  fuel_categories = { "chemical" },
   smoke = {
     {
-      name = "smoke",
-      frequency = 30,
-      north_position = {-0.43, -2.3},
-      south_position = {0.23, -1.9},
-      east_position  = {0.5, -2.15},
-      west_position  = {-0.45, -2.0},
-      starting_vertical_speed = 0.1,
+      name                     = "smoke",
+      frequency                = 30,
+      north_position           = { -0.43, -2.3 },
+      south_position           = { 0.23, -1.9 },
+      east_position            = { 0.5, -2.15 },
+      west_position            = { -0.45, -2.0 },
+      starting_vertical_speed  = 0.1,
       starting_frame_deviation = 60,
     },
   },

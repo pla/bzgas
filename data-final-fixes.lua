@@ -15,15 +15,16 @@ data.raw["assembling-machine"]["basic-chemical-plant"].energy_source and
 data.raw["assembling-machine"]["basic-chemical-plant"].energy_source.fuel_categories then
   table.insert(data.raw["assembling-machine"]["basic-chemical-plant"].energy_source.fuel_categories , "kr-vehicle-fuel")
 end
-
+if mods.Krastorio2 then -- analog 1.1
+  util.remove_ingredient("splitter", "electronic-circuit")
+  util.replace_ingredient("inserter", "electronic-circuit", "iron-stick")
+  util.replace_ingredient("assembling-machine-1", "electronic-circuit", "kr-automation-core")
+end
 -- Vanilla burner phase tweaks -- green circuits after electronics
 -- Electronic circuit recipe set below in compatibility script
 if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
   util.replace_ingredient("assembling-machine-1", "electronic-circuit", "copper-plate")
-  -- util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable", 2, true)
-  -- util.replace_ingredient("radar", "electronic-circuit", "copper-plate")
-  -- util.replace_ingredient("splitter", "electronic-circuit", "copper-cable", 20)
 
   -- Keep repair pack raw ingredients the same:
   util.remove_ingredient("repair-pack", "electronic-circuit")

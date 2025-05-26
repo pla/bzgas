@@ -91,7 +91,7 @@ data:extend({
       pipe_connections =
       {
         {
-          flow_direction = "input-output",
+          flow_direction = "output",
           direction = defines.direction.north,
           positions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} }
         }

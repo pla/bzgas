@@ -3,7 +3,7 @@ require("stacking")
 -- require("tin-recipe-final-5d")
 -- require("compatibility/ir2")
 
-local util = require("__bzgas__.data-util");
+local util = require("__bzgas__.data-util")
 
 -- core mining balancing
 util.set_product_amount("se-core-fragment-omni", "gas", 24)
@@ -49,6 +49,12 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   -- util.set_enabled("inserter", false)
   -- util.add_prerequisite("logistic-science-pack", "electronics")
 end
+
+if mods.bzaluminum then
+  util.remove_prerequisite("automation", "automation-science-pack")
+  util.set_tech_trigger("automation", { type = "mine-entity", entity = "coal" })
+end
+
 if not mods.bzaluminum and not mods.bzcarbon then
   -- not needed in 2.0
   -- util.replace_ingredients_prior_to("electronics", "electronic-circuit", "copper-cable", 2)

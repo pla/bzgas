@@ -1,4 +1,4 @@
-local util = require("__bzgas__.data-util");
+local util = require("__bzgas__.data-util")
 
 b_prereq = {"basic-chemistry"}
 if data.raw.technology["foundry"] then
@@ -18,7 +18,7 @@ data:extend({
   {
     type = "recipe",
     name = "bakelite",
-    category = "chemistry",
+    categories = {"chemistry"},
     main_product = "bakelite",
     allow_productivity = true,
     enabled = false,

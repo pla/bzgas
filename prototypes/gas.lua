@@ -39,7 +39,7 @@ data:extend({
           name = "gas",
           amount_min = 10,
           amount_max = 10,
-          probability = 1
+          independent_probability = 1
         }
       }
     },
@@ -124,7 +124,7 @@ if util.me.finite() then
         name = "gas",
         amount_min = 20,
         amount_max = 20,
-        probability = 1,
+        independent_probability = 1,
       },
     },
   }

@@ -625,8 +625,8 @@ io_manip = function(io_handler,old_name,new_name,mult)
 			if new_io_type == "fluid" then
 				result.amount = 
 					result.amount
-					*(result.probability or 1)
-				result.probability = nil
+					*(result.independent_probability or 1)
+				result.independent_probability = nil
 			end
 			result[2] = nil
 			new_amount = result.amount
@@ -668,46 +668,46 @@ io_manip = function(io_handler,old_name,new_name,mult)
 	return new_amount
 end
 
-remove_ingredient = function(recipe,ingred_name)
-	local recipe = recipe_or_bust(recipe)
-	local ingred_name = 
-		string_name_or_bust(ingred_name,count,prob)
-	local found_and_removed = false
-	if not recipe or not ingred_name
-	then return found_and_removed end
-	if recipe.expensive then
-		for _,ingredient
-		in pairs(recipe.expensive.ingredients or {})
-		do
-			if ingredient.name == ingred_name
-			or ingredient[1] == ingred_name then
-				recipe.expensive.ingredients[_] = nil
-				found_and_removed = true
-			end
-		end
-	end
-	if recipe.normal then
-		for _,ingredient
-		in pairs(recipe.normal.ingredients or {})
-		do
-			if ingredient.name == ingred_name
-			or ingredient[1] == ingred_name then
-				recipe.normal.ingredients[_] = nil
-				found_and_removed = true
-			end
-		end
-	end
-	for _,ingredient
-	in pairs(recipe.ingredients or {})
-	do
-		if ingredient.name == ingred_name
-		or ingredient[1] == ingred_name then
-			recipe.ingredients[_] = nil
-			found_and_removed = true
-		end
-	end
-	return found_and_removed
-end
+-- remove_ingredient = function(recipe,ingred_name)
+-- 	local recipe = recipe_or_bust(recipe)
+-- 	local ingred_name = 
+-- 		string_name_or_bust(ingred_name,count,prob)
+-- 	local found_and_removed = false
+-- 	if not recipe or not ingred_name
+-- 	then return found_and_removed end
+-- 	if recipe.expensive then
+-- 		for _,ingredient
+-- 		in pairs(recipe.expensive.ingredients or {})
+-- 		do
+-- 			if ingredient.name == ingred_name
+-- 			or ingredient[1] == ingred_name then
+-- 				recipe.expensive.ingredients[_] = nil
+-- 				found_and_removed = true
+-- 			end
+-- 		end
+-- 	end
+-- 	if recipe.normal then
+-- 		for _,ingredient
+-- 		in pairs(recipe.normal.ingredients or {})
+-- 		do
+-- 			if ingredient.name == ingred_name
+-- 			or ingredient[1] == ingred_name then
+-- 				recipe.normal.ingredients[_] = nil
+-- 				found_and_removed = true
+-- 			end
+-- 		end
+-- 	end
+-- 	for _,ingredient
+-- 	in pairs(recipe.ingredients or {})
+-- 	do
+-- 		if ingredient.name == ingred_name
+-- 		or ingredient[1] == ingred_name then
+-- 			recipe.ingredients[_] = nil
+-- 			found_and_removed = true
+-- 		end
+-- 	end
+-- 	return found_and_removed
+-- end
 
 blend_io_if_match = function(io_base,io_counter)
 	local io_base = io_prototype_or_bust(io_base)
@@ -762,44 +762,13 @@ add_ingredient = function(recipe,ingred,count,prob,catalyst_amount)
 	if type(prob) ~= "number" then prob = nil end
 	if not recipe or not ingred then return nil end
 	if uses_ingredient(recipe,ingred.name) then
-		if recipe.expensive then
-			for _,ingredient
-			in pairs(recipe.expensive.ingredients or {})
-			do
-				blend_io_if_match(ingredient,ingred)
-			end
-		end
-		if recipe.normal then
-			for _,ingredient
-			in pairs(recipe.normal.ingredients or {})
-			do
-				blend_io_if_match(ingredient,ingred)
-			end
-		end
 		for _,ingredient
 		in pairs(recipe.ingredients or {})
 		do
 			blend_io_if_match(ingredient,ingred)
 		end
 	else
-		if recipe.expensive then
-			local exp_ingred = util.table.deepcopy(ingred)
-			if not recipe.expensive.ingredients then
-				recipe.expensive.ingredients = {}
-			end
-			table.insert(recipe.expensive.ingredients,exp_ingred)
-		end
-		if recipe.normal then
-			if not recipe.normal.ingredients then
-				recipe.normal.ingredients = {}
-			end
-			table.insert(recipe.normal.ingredients,ingred)
-		end
 		if recipe.ingredients then
-			table.insert(recipe.ingredients,ingred)
-		elseif not recipe.normal and not recipe.expensive
-		then
-			recipe.ingredients = {}
 			table.insert(recipe.ingredients,ingred)
 		end
 	end
@@ -819,42 +788,11 @@ add_result = function(recipe,product,count,prob)
 	if type(prob) ~= "number" then prob = nil end
 	format_results(recipe)
 	if uses_result(recipe,product) then
-		if recipe.expensive then
-			for _,result
-			in pairs(recipe.expensive.results
-			or {recipe.expensive.result}
-			) do
-				blend_io_if_match(result,product)
-			end
-		end
-		if recipe.normal then
-			for _,result
-			in pairs(recipe.normal.results
-			or {recipe.normal.result}
-			) do
-				blend_io_if_match(result,product)
-			end
-		end		
-		for _,result
-		in pairs(recipe.results
-		or {recipe.result}
-		) do
+		for _,result in pairs(recipe.results) do
 			blend_io_if_match(result,product)
 		end
 	else
-		if recipe.expensive then
-			local exp_product = util.table.deepcopy(product)
-			exp_product.amount = (exp_product.amount or 1)*2
-			table.insert(recipe.expensive.results,exp_product)
-		end
-		if recipe.normal then
-			table.insert(recipe.normal.results,product)
-		end
 		if recipe.results then
-			table.insert(recipe.results,product)
-		elseif not recipe.normal and not recipe.expensive
-		then
-			recipe.results = {}
 			table.insert(recipe.results,product)
 		end
 	end
@@ -863,82 +801,6 @@ end
 move_result_to_main_product = function(recipe)
 	local recipe = recipe_or_bust(recipe)
 	if not recipe then return false end
-	if recipe.expensive then
-		if not recipe.expensive.results
-		or type(recipe.expensive.results) ~= "table"
-		then
-			if recipe.expensive.result then
-				recipe.expensive.results = {{
-						type = "item",
-						name = recipe.expensive.result,
-						amount =
-							recipe.expensive.result_count
-							or 1
-				}}
-				if not recipe.expensive.main_product then
-					recipe.expensive.main_product =
-						recipe.expensive.result
-				end
-				recipe.expensive.result = nil
-				recipe.expensive.result_count = nil
-			end
-		elseif recipe.expensive.result then
-			if not recipe.expensive.main_product then
-				recipe.expensive.main_product =
-					recipe.expensive.result
-			end
-			table.insert(
-				results,
-				{
-					type = "item",
-					name = recipe.expensive.result,
-					amount =
-						(recipe.expensive.result_count
-						or 1)
-				}
-			)
-			recipe.expensive.result = nil
-			recipe.expensive.result_count = nil
-		end	
-	end
-	if recipe.normal then
-		if not recipe.normal.results
-		or type(recipe.normal.results) ~= "table"
-		then
-			if recipe.normal.result then
-				recipe.normal.results = {{
-						type = "item",
-						name = recipe.normal.result,
-						amount =
-							recipe.normal.result_count
-							or 1
-				}}
-				if not recipe.normal.main_product then
-					recipe.normal.main_product =
-						recipe.normal.result
-				end
-				recipe.normal.result = nil
-				recipe.normal.result_count = nil
-			end
-		elseif recipe.normal.result then
-			if not recipe.normal.main_product then
-				recipe.normal.main_product =
-					recipe.normal.result
-			end
-			table.insert(
-				results,
-				{
-					type = "item",
-					name = recipe.normal.result,
-					amount =
-						(recipe.normal.result_count
-						or 1)
-				}
-			)
-			recipe.normal.result = nil
-			recipe.normal.result_count = nil
-		end
-	end
 	if not recipe.results
 	or type(recipe.results) ~= "table"
 	then
@@ -954,8 +816,6 @@ move_result_to_main_product = function(recipe)
 				recipe.main_product =
 					recipe.result
 			end
-			recipe.result = nil
-			recipe.result_count = nil
 		end
 	elseif recipe.result then
 		if not recipe.main_product then
@@ -972,8 +832,6 @@ move_result_to_main_product = function(recipe)
 					or 1)
 			}
 		)
-		recipe.result = nil
-		recipe.result_count = nil
 	end
 end
 

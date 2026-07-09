@@ -1,4 +1,4 @@
-local util = require("data-util");
+local util = require("data-util")
 
 if mods["248k"] then
   data:extend({
@@ -9,7 +9,7 @@ if mods["248k"] then
         {icon = "__bzgas__/graphics/icons/gas.png", icon_size = 128},
         {icon = "__248k__/ressources/fluids/fi_acid_gas.png", icon_size = 64, scale=0.25, shift={-8,-8}},
       },
-      category = "chemistry",
+      categories = {"chemistry"},
       subgroup = "fi_item_subgroup_f",
       enabled = false,
       energy_required = 3,

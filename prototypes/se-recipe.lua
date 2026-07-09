@@ -1,9 +1,9 @@
-local util = require("data-util");
+local util = require("data-util")
 
 if mods["space-exploration"] then
-  se_delivery_cannon_recipes["formaldehyde-barrel"] = {name= "formaldehyde-barrel"}
-  se_delivery_cannon_recipes["gas-barrel"] = {name= "gas-barrel"}
-  se_delivery_cannon_recipes["bakelite"] = {name= "bakelite"}
+  se_delivery_cannon_recipes["formaldehyde-barrel"] = { name = "formaldehyde-barrel" }
+  se_delivery_cannon_recipes["gas-barrel"] = { name = "gas-barrel" }
+  se_delivery_cannon_recipes["bakelite"] = { name = "bakelite" }
 end
 
 if util.se6() then
@@ -11,7 +11,7 @@ if util.se6() then
     {
       type = "recipe",
       name = "methane-pre-reforming",
-      category = "chemistry",
+      categories = {"chemistry"},
       subgroup = "fluid-recipes",
       main_product = "se-methane-gas",
       icons = {
@@ -30,7 +30,7 @@ if util.se6() then
     {
       type = "recipe",
       name = "formaldehyde-methane",
-      category = "chemistry",
+      categories = {"chemistry"},
       subgroup = "fluid-recipes",
       icons = {
         {icon =  "__bzgas__/graphics/icons/formaldehyde.png", icon_size = 128, scale = 0.125},

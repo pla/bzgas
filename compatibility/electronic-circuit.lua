@@ -1,5 +1,5 @@
-local util = require("data-util");
-local futil = require("util");
+local util = require("__bzgas__/data-util")
+local futil = require("util")
 
 -- Electronic circuits need final fixes
 if data.raw.recipe["electronic-circuit-stone"] then

@@ -6,7 +6,6 @@ require("prototypes/bakelite")
 require("prototypes/basic-chemical-plant")
 require("prototypes/k2-recipe")
 require("prototypes/se-recipe")
-require("gas-sim")
 
 local util = require("data-util");
 
